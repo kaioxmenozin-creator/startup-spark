@@ -9,13 +9,13 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Chile 20 — Showroom 3D de Jaquetas" },
+      { title: "DUHYPE — Showroom 3D de Jaquetas" },
       {
         name: "description",
         content:
-          "Showroom imersivo Chile 20: arraste para girar entre as jaquetas em camera lenta, com luz neon e nevoa cinematografica.",
+          "Showroom imersivo DUHYPE: arraste para girar entre as jaquetas em camera lenta, com luz neon e nevoa cinematografica.",
       },
-      { property: "og:title", content: "Chile 20 — Showroom 3D de Jaquetas" },
+      { property: "og:title", content: "DUHYPE — Showroom 3D de Jaquetas" },
       {
         property: "og:description",
         content:
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
 
 const PRODUCTS = [
   {
-    name: "Chile 20 Track Top",
+    name: "DUHYPE Track Top",
     color: "Vermelho",
     img: jacketRed,
     scene: {
@@ -44,7 +44,7 @@ const PRODUCTS = [
     },
   },
   {
-    name: "Chile 20 Track Top",
+    name: "DUHYPE Track Top",
     color: "Preto",
     img: jacketBlack,
     scene: {
@@ -58,7 +58,7 @@ const PRODUCTS = [
     },
   },
   {
-    name: "Chile 20 Track Top",
+    name: "DUHYPE Track Top",
     color: "Branco",
     img: jacketWhite,
     scene: {
@@ -176,7 +176,7 @@ function Index() {
       <header className="relative z-30 flex items-center justify-between px-6 pt-8">
         <div className="flex items-center gap-4">
           <span className="brand-mark">III</span>
-          <span className="brand-tag">Foot Locker</span>
+          <span className="brand-tag">DUHYPE</span>
         </div>
         <span className="menu-icon" aria-hidden="true">
           <i />
@@ -213,7 +213,7 @@ function Index() {
                 <div className="piece-body">
                   <img
                     src={p.img}
-                    alt={`Jaqueta Chile 20 ${p.color}, vista das costas`}
+                    alt={`Jaqueta DUHYPE ${p.color}, vista das costas`}
                     width={760}
                     height={760}
                     draggable={false}
@@ -254,12 +254,12 @@ function Index() {
       </section>
 
       <footer className="showfoot relative z-30 pb-6 text-center">
-        <div className="title-frame">CHILE 20</div>
+        <div className="title-frame">DUHYPE</div>
         <p className="subtitle">
           {current.color} — arraste para o lado para trocar
         </p>
         <nav className="legal">
-          <span>© 2026 CHILE 20</span>
+          <span>© 2026 DUHYPE</span>
           <span>TERMOS</span>
           <span>PRIVACIDADE</span>
           <span>COOKIES</span>
