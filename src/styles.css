@@ -455,3 +455,72 @@
   letter-spacing: 0.18em;
   color: oklch(0.7 0 0 / 55%);
 }
+
+/* Loading screen */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: radial-gradient(
+    120% 80% at 50% 40%,
+    color-mix(in oklab, var(--show-glow) 22%, oklch(0.1 0.01 260)) 0%,
+    oklch(0.07 0.005 260) 70%
+  );
+  color: var(--show-ink);
+  opacity: 1;
+  transition:
+    opacity 700ms ease,
+    visibility 700ms ease;
+}
+.loader-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-mark {
+  font-size: clamp(1.6rem, 9vw, 3rem);
+  letter-spacing: 0.42em;
+  font-weight: 700;
+  text-indent: 0.42em;
+  text-shadow: 0 0 28px color-mix(in oklab, var(--show-neon) 70%, transparent);
+  animation: loader-pulse 2.4s ease-in-out infinite;
+}
+.loader-bar {
+  width: min(62vw, 320px);
+  height: 2px;
+  border-radius: 999px;
+  background: oklch(1 0 0 / 12%);
+  overflow: hidden;
+}
+.loader-fill {
+  display: block;
+  height: 100%;
+  background: var(--show-neon);
+  box-shadow: 0 0 16px var(--show-neon);
+  transition: width 400ms ease;
+}
+.loader-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+@keyframes loader-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-mark {
+    animation: none;
+  }
+}
