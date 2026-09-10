@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import jacketRed from "@/assets/jacket-red.png";
 import jacketBlack from "@/assets/jacket-black.png";
 import jacketWhite from "@/assets/jacket-white.png";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -71,6 +72,8 @@ const PRODUCTS = [
     },
   },
 ] as const;
+
+const IMAGES = [jacketRed, jacketBlack, jacketWhite] as const;
 
 function Index() {
   const [index, setIndex] = useState(0);
@@ -249,7 +252,7 @@ function Index() {
       <footer className="showfoot relative z-30 pb-6 text-center">
         <div className="title-frame">CHILE 20</div>
         <p className="subtitle">
-          {active.color} — arraste para o lado para trocar
+          {current.color} — arraste para o lado para trocar
         </p>
         <nav className="legal">
           <span>© 2026 CHILE 20</span>
