@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import jacketRed from "@/assets/jacket-red.png";
-import jacketBlack from "@/assets/jacket-black.png";
-import jacketWhite from "@/assets/jacket-white.png";
+import jacketRed from "@/assets/jacket-red.webp";
+import jacketBlack from "@/assets/jacket-black.webp";
+import jacketWhite from "@/assets/jacket-white.webp";
 import { LoadingScreen } from "@/components/LoadingScreen";
 
 export const Route = createFileRoute("/")({
@@ -154,6 +154,10 @@ function Index() {
         e.currentTarget.setPointerCapture?.(e.pointerId);
         startDrag(e.clientX);
       }}
+      onPointerMove={(e) => moveDrag(e.clientX)}
+      onPointerUp={() => endDrag()}
+      onPointerCancel={() => endDrag()}
+      onLostPointerCapture={() => endDrag()}
     >
       <LoadingScreen sources={IMAGES} />
 
@@ -199,7 +203,7 @@ function Index() {
                 style={{
                   transform: `translate3d(${pos * 54}%, ${abs * 3}%, ${-abs * 300}px) rotateY(${-sign * clamped * 46 + (isCenter ? tilt : 0)}deg) rotateX(${-Math.abs(tilt) * 0.12}deg) rotateZ(${-pos * 2.4}deg) scale(${1.35 - clamped * 0.26})`,
                   opacity: abs > 1.6 ? 0 : 1 - abs * 0.28,
-                  filter: `brightness(${1 - clamped * 0.52}) contrast(${1 + clamped * 0.1}) blur(${clamped * 2.2}px)`,
+                  filter: `brightness(${1 - clamped * 0.52}) contrast(${1 + clamped * 0.1})${dragging ? "" : ` blur(${clamped * 2.2}px)`}`,
                   zIndex: 20 - Math.round(abs * 10),
                   transition: dragging
                     ? "transform 120ms linear"
@@ -210,8 +214,8 @@ function Index() {
                   <img
                     src={p.img}
                     alt={`Jaqueta Chile 20 ${p.color}, vista das costas`}
-                    width={1024}
-                    height={1024}
+                    width={760}
+                    height={760}
                     draggable={false}
                     className="piece-img"
                   />
@@ -238,8 +242,8 @@ function Index() {
                   src={p.img}
                   alt=""
                   aria-hidden="true"
-                  width={1024}
-                  height={1024}
+                  width={760}
+                  height={760}
                   draggable={false}
                   className="piece-reflection"
                 />

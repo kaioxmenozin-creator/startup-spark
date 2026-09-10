@@ -524,3 +524,22 @@
     animation: none;
   }
 }
+
+/* Mobile: reduce GPU-heavy layers so the carousel cannot crash the browser */
+@media (max-width: 780px) {
+  .piece-sheen,
+  .piece-shade,
+  .piece-reflection,
+  .haze-fast {
+    display: none;
+  }
+  .beam {
+    filter: blur(18px);
+  }
+  .piece-img {
+    filter: drop-shadow(0 26px 40px oklch(0 0 0 / 70%));
+  }
+  .piece {
+    will-change: transform, opacity;
+  }
+}
