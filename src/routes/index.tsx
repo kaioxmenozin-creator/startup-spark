@@ -114,7 +114,7 @@ function Index() {
   const endDrag = () => {
     if (!draggingRef.current) return;
     const d = dragRef.current;
-    const threshold = travel() * 0.65;
+    const threshold = travel() * 0.32;
     if (d <= -threshold) setIndex((i) => i + 1);
     else if (d >= threshold) setIndex((i) => i - 1);
     draggingRef.current = false;
