@@ -122,47 +122,38 @@ function Index() {
 
   useEffect(() => {
     const move = (e: PointerEvent) => moveDrag(e.clientX);
-    const touchMove = (e: TouchEvent) => {
-      if (!draggingRef.current) return;
-      const t = e.touches[0];
-      if (t) {
-        e.preventDefault();
-        moveDrag(t.clientX);
-      }
-    };
     const up = () => endDrag();
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
     window.addEventListener("pointercancel", up);
-    window.addEventListener("touchmove", touchMove, { passive: false });
-    window.addEventListener("touchend", up);
+    window.addEventListener("blur", up);
     return () => {
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
       window.removeEventListener("pointercancel", up);
-      window.removeEventListener("touchmove", touchMove);
-      window.removeEventListener("touchend", up);
+      window.removeEventListener("blur", up);
     };
   }, []);
 
   const dragShiftNow = dragging ? drag / travel() : 0;
   const tilt = dragShiftNow * 14;
   const sceneIndex = Math.round(index - dragShiftNow);
-  const scene =
-    PRODUCTS[((sceneIndex % PRODUCTS.length) + PRODUCTS.length) % PRODUCTS.length]?.scene ??
-    PRODUCTS[0].scene;
+  const current =
+    PRODUCTS[((sceneIndex % PRODUCTS.length) + PRODUCTS.length) % PRODUCTS.length] ?? active;
+  const scene = current.scene;
 
   return (
     <main
       ref={stageRef}
       style={scene as React.CSSProperties}
       className="stage relative min-h-screen w-full select-none overflow-hidden"
-      onPointerDown={(e) => startDrag(e.clientX)}
-      onTouchStart={(e) => {
-        const t = e.touches[0];
-        if (t) startDrag(t.clientX);
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+        startDrag(e.clientX);
       }}
     >
+      <LoadingScreen sources={IMAGES} />
+
       <div className="pillars" aria-hidden="true">
         <span className="pillar pillar-stone" />
         <span className="pillar pillar-neon" />
